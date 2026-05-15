@@ -1,0 +1,30 @@
+# Rust build artifacts
+/target
+
+# Node
+node_modules/
+
+# napi-rs build outputs (placed in the package root by `napi build`)
+*.node
+
+# The viewer binary, copied into the package root by `npm run build:viewer`
+# for local dev. CI distributes per-platform copies into npm/<target>/.
+/simulang-log-viewer
+/simulang-log-viewer.exe
+
+
+# CI download target for `actions/download-artifact`
+/artifacts
+
+# Yarn 4: keep .yarn/releases (the bundled yarn binary is committed) but
+# ignore the per-install caches and state. Mirrors simulang-js's setup.
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+/npm
+# OS junk
+.DS_Store

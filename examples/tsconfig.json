@@ -1,0 +1,15 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "noEmit": true,
+    "rootDir": ".",
+    "paths": {
+      "@simular-ai/simulang-log-viewer": ["../auto-install.d.ts"],
+      "@simular-ai/simulang-log-viewer/binding": ["../index.d.ts"]
+    }
+  },
+  "include": ["**/*.mjs"],
+  "exclude": ["node_modules"]
+}

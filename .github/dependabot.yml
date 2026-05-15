@@ -1,0 +1,59 @@
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    cooldown:
+      default-days: 7
+    labels:
+      - 'dependencies'
+    commit-message:
+      prefix: 'chore'
+    versioning-strategy: 'increase'
+    groups:
+      napi-rs:
+        patterns:
+          - '@napi-rs/*'
+          - '@emnapi/*'
+          - 'napi*'
+      linter:
+        patterns:
+          - 'oxlint'
+          - 'prettier'
+          - 'typescript'
+          - '@types/node'
+
+  - package-ecosystem: 'cargo'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    cooldown:
+      default-days: 7
+    labels:
+      - 'dependencies'
+    commit-message:
+      prefix: 'chore'
+    groups:
+      # eframe usually bumps in lockstep with its objc2-* siblings (winit
+      # release cadence drives both). Grouping avoids 4-5 separate PRs
+      # every time eframe bumps a patch.
+      gui:
+        patterns:
+          - 'eframe'
+          - 'egui*'
+          - 'objc2*'
+      napi-rs:
+        patterns:
+          - 'napi*'
+
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    cooldown:
+      default-days: 7
+    labels:
+      - 'dependencies'
+    commit-message:
+      prefix: 'chore'

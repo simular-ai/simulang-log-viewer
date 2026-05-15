@@ -1,0 +1,110 @@
+{
+  "name": "@simular-ai/simulang-log-viewer",
+  "version": "6.0.0",
+  "description": "Floating log window for automation scripts. eframe viewer + napi bindings.",
+  "main": "auto-install.js",
+  "types": "./auto-install.d.ts",
+  "exports": {
+    ".": {
+      "types": "./auto-install.d.ts",
+      "default": "./auto-install.js"
+    },
+    "./binding": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simular-ai/simulang-log-viewer.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "simulang",
+    "simulang-js",
+    "Simular AI",
+    "log",
+    "logger",
+    "napi-rs",
+    "NAPI",
+    "N-API",
+    "Rust",
+    "node-addon",
+    "typescript",
+    "types"
+  ],
+  "files": [
+    "auto-install.d.ts",
+    "auto-install.js",
+    "index.d.ts",
+    "index.js",
+    "examples/*.mjs",
+    "examples/README.md"
+  ],
+  "napi": {
+    "binaryName": "simulang-log-viewer",
+    "targets": [
+      "x86_64-pc-windows-msvc",
+      "aarch64-pc-windows-msvc",
+      "x86_64-apple-darwin",
+      "aarch64-apple-darwin",
+      "x86_64-unknown-linux-gnu",
+      "aarch64-unknown-linux-gnu"
+    ],
+    "constEnum": false
+  },
+  "engines": {
+    "node": ">= 20"
+  },
+  "peerDependencies": {
+    "@simular-ai/simulang-js": ">=6.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "artifacts": "napi artifacts && node scripts/distribute-viewer.mjs",
+    "build": "napi build --platform --release && cargo build --release --features viewer --bin simulang-log-viewer && node scripts/copy-viewer-local.mjs release",
+    "build:debug": "napi build --platform && cargo build --features viewer --bin simulang-log-viewer && node scripts/copy-viewer-local.mjs debug",
+    "format": "run-p format:prettier format:rs format:toml",
+    "format:prettier": "prettier . -w",
+    "format:toml": "taplo format",
+    "format:rs": "cargo fmt",
+    "lint": "oxlint .",
+    "prepublishOnly": "napi prepublish -t npm $NAPI_PREPUBLISH_FLAGS",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p examples/tsconfig.json",
+    "preversion": "napi build --platform && npm run typecheck && git add .",
+    "version": "napi version",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@napi-rs/cli": "^3.6.1",
+    "@simular-ai/simulang-js": ">=6.0.0",
+    "@taplo/cli": "^0.7.0",
+    "@types/node": "^25.5.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.2",
+    "npm-run-all2": "^8.0.4",
+    "oxlint": "^1.63.0",
+    "prettier": "^3.8.2",
+    "typescript": "^6.0.2"
+  },
+  "lint-staged": {
+    "*.@(js|ts|tsx)": [
+      "oxlint --fix"
+    ],
+    "*.@(js|ts|tsx|yml|yaml|md|json)": [
+      "prettier --write"
+    ],
+    "*.toml": [
+      "taplo format"
+    ]
+  },
+  "prettier": {
+    "printWidth": 120,
+    "semi": false,
+    "trailingComma": "all",
+    "singleQuote": true,
+    "arrowParens": "always"
+  }
+}
