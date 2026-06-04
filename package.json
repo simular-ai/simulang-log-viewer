@@ -78,7 +78,7 @@
     "prepare": "husky"
   },
   "devDependencies": {
-    "@napi-rs/cli": "^3.6.1",
+    "@napi-rs/cli": "^3.7.0",
     "@simular-ai/simulang-js": ">=6.0.0",
     "@taplo/cli": "^0.7.0",
     "@types/node": "^25.5.2",
