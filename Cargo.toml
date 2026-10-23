@@ -36,7 +36,7 @@ eframe = { version = "0.34", default-features = false, features = [
   "wayland",
   "x11",
 ], optional = true }
-global-hotkey = { version = "0.8", optional = true }
+global-hotkey = { version = "0.9", optional = true }
 
 [target.'cfg(target_os = "macos")'.dependencies]
 objc2 = { version = "0.6", optional = true }
